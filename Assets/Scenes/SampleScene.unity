@@ -292,6 +292,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1837589318, guid: 594d9643dd17ec149b26b18d89dd7335, type: 3}
+      propertyPath: m_StepOffset
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2261302902960313857, guid: 594d9643dd17ec149b26b18d89dd7335,
         type: 3}
       propertyPath: m_Name
