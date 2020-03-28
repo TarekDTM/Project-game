@@ -43,3 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f07fc2087f47f47ba90a42f62d0baa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionCanvas: {fileID: 0}
+  CrosshairCanvas: {fileID: 0}

@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectableTag: Selectable
-  objectDistance: 1.5
-  maxInteractableDistance: 2
+  maxInteractableDistance: 4.5
+  timeBeforeTextApearance: 1
