@@ -19,7 +19,13 @@ public class MouseNavigation : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    // TODO: Comment to be removed later - LaMaSu 29/03/2020
+    /*
+     we perform all camera movement and rotation calculations in LateUpdate() 
+     as this will ensure that the character has moved completely before the 
+     camera tracks its position.
+         */
+    void LateUpdate()
     {
         LookingAround();
     }
