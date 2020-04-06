@@ -10,22 +10,26 @@ public class PlayerMovment : MonoBehaviour
 
     private float originalCenterY;
     private float originalHeight;
+    private float coliderRadious;
     private float height;
 
     public CharacterController controller;
-    public Animator animator;
-    public Transform playerCamera;
+    public MouseNavigation cameraMovement;
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
+    public LayerMask playerMask;
+    int layerMaskAllButThePlayer;
     private Vector3 moveDirection;
     private bool isGrounded;
     private bool isCrouched;
 
     private void Start()
     {
+        coliderRadious = controller.radius;
         height = originalHeight = controller.height;
         originalCenterY = controller.center.y;
+        layerMaskAllButThePlayer = ~playerMask.value;
     }
 
     // Update is called once per frame
@@ -52,29 +56,21 @@ public class PlayerMovment : MonoBehaviour
             // We change the heigh & center of the colider
             controller.height = height = 0.5f * originalHeight;
             controller.center = Vector3.up * originalCenterY * 0.5f;
-            // Move the camera to the new position of the eyes
-            var camPos = playerCamera.position;
-            camPos.y /= 2f;
-            playerCamera.position = camPos;
-            // Set the animation pose
-            animator.SetBool("Crouching", true);
             speed = crouchSpeed;
             isCrouched = true;
         }
         else
         {
+            RaycastHit hit;
+            if (Physics.SphereCast(transform.position, coliderRadious, Vector3.up, out hit, originalHeight, layerMaskAllButThePlayer))
+                return;
             // We change the heigh & center of the colider
             controller.height = height = originalHeight;
             controller.center = Vector3.up * originalCenterY;
-            // Move the camera to the new position of the eyes
-            var camPos = playerCamera.position;
-            camPos.y *= 2f;
-            playerCamera.position = camPos;
-            // Set the animation pose
-            animator.SetBool("Crouching", false);
             speed = walkingSpeed;
             isCrouched = false;
         }
+        cameraMovement.UpdateCameraHeightTarget(isCrouched);
     }
 
     private void Jump()
